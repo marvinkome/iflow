@@ -1,5 +1,6 @@
-$topbarHeight: 50px;
+$topbarHeight: 40px;
 $sidebarWidth: 250px;
+$primaryColor: #673ab7;
 
 .main-container {
     position: relative;
@@ -29,7 +30,7 @@ $sidebarWidth: 250px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: $topbarHeight;
+                width: calc(15px + #{$topbarHeight});
                 height: $topbarHeight;
                 cursor: pointer;
                 color: hsla(0, 0%, 100%, 0.8);
@@ -40,7 +41,7 @@ $sidebarWidth: 250px;
                 }
 
                 &.active {
-                    background-color: #673ab7;
+                    background-color: $primaryColor;
                     color: hsla(0, 0%, 100%, 1);
                 }
             }
@@ -60,7 +61,32 @@ $sidebarWidth: 250px;
         z-index: 2;
 
         background-color: #fff;
-        padding: 10px 15px;
+
+        h5 {
+            border-bottom: 1px solid hsl(0, 0%, 80%);
+            padding: 10px 15px;
+        }
+
+        .layers-list {
+            p {
+                display: flex;
+                align-items: center;
+                padding: 7px 15px;
+
+                &:hover {
+                    border: 0.5px solid transparentize($color: $primaryColor, $amount: 0.2);
+                }
+
+                .icon {
+                    font-size: 1em;
+                    margin-right: 10px;
+                }
+
+                span {
+                    font-size: 13px;
+                }
+            }
+        }
     }
 
     .design {

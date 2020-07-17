@@ -5,6 +5,10 @@ import { fabric } from "fabric"
 import { Mode } from "types"
 
 import { Topbar } from "components/topbar"
+import { Layers } from "components/layers"
+
+// custom fabric objects
+import { LabeledRect } from "./fabric-utils"
 import "./App.scss"
 
 /**
@@ -29,6 +33,7 @@ export class MainApp extends React.Component<{}, StateType> {
     zoom: PanZoom | null = null
     canvas: fabric.Canvas | null = null
     canvasRef = createRef<HTMLCanvasElement>()
+    frameCount = 0
 
     state = {
         mode: Mode.MOVE,
@@ -56,6 +61,7 @@ export class MainApp extends React.Component<{}, StateType> {
             beforeWheel: (e) => !e.altKey,
             beforeMouseDown: (e) => !e.altKey,
             smoothScroll: false,
+            transformOrigin: { x: 0.5, y: 0.5 },
         })
 
         // initial zoom
@@ -77,12 +83,13 @@ export class MainApp extends React.Component<{}, StateType> {
             x = mouse?.x as number
             y = mouse?.y as number
 
-            const square = new fabric.Rect({
+            const square = new LabeledRect({
                 width: 0,
                 height: 0,
                 left: x,
                 top: y,
                 fill: "red",
+                label: `Frame ${this.frameCount++}`,
             })
 
             this.canvas?.add(square)
@@ -110,11 +117,10 @@ export class MainApp extends React.Component<{}, StateType> {
             }
 
             const square = this.canvas?.getActiveObject()!
-
             this.canvas?.add(square)
             this.canvas?.renderAll()
 
-            // change mode and remove listeners
+            // change mode
             this.changeMode(Mode.MOVE)
         })
     }
@@ -176,13 +182,16 @@ export class MainApp extends React.Component<{}, StateType> {
      * Render
      */
     render() {
+        const layers = this.canvas?.getObjects().map((obj: any) => ({
+            label: obj.label,
+            type: obj.type,
+        }))
+
         return (
             <div className="main-container">
                 <Topbar mode={this.state.mode} onChangeMode={this.changeMode} />
 
-                <aside className="layers">
-                    <h5>Layers</h5>
-                </aside>
+                <Layers layers={this.canvas?.getObjects()} />
 
                 <div className={classnames("main-app", this.state.mode)}>
                     <div className="drawing-canvas">
