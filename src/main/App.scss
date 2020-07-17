@@ -1,0 +1,98 @@
+$topbarHeight: 50px;
+$sidebarWidth: 250px;
+
+.main-container {
+    position: relative;
+    background-color: hsl(0, 0%, 90%);
+    height: 100vh;
+    width: 100%;
+
+    .toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: $topbarHeight;
+        width: 100%;
+        z-index: 2;
+
+        background-color: hsl(0, 0%, 10%);
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .controls {
+            display: flex;
+            align-items: stretch;
+
+            .control {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: $topbarHeight;
+                height: $topbarHeight;
+                cursor: pointer;
+                color: hsla(0, 0%, 100%, 0.8);
+
+                &:hover {
+                    background-color: hsl(0, 0%, 5%);
+                    color: hsla(0, 0%, 100%, 1);
+                }
+
+                &.active {
+                    background-color: #673ab7;
+                    color: hsla(0, 0%, 100%, 1);
+                }
+            }
+
+            .icon {
+                font-size: 1.3em;
+            }
+        }
+    }
+
+    .layers {
+        position: absolute;
+        top: $topbarHeight;
+        left: 0;
+        height: calc(100% - #{$topbarHeight});
+        width: $sidebarWidth;
+        z-index: 2;
+
+        background-color: #fff;
+        padding: 10px 15px;
+    }
+
+    .design {
+        position: absolute;
+        top: $topbarHeight;
+        right: 0;
+        height: calc(100% - #{$topbarHeight});
+        width: $sidebarWidth;
+        z-index: 2;
+
+        background-color: #fff;
+        padding: 10px 15px;
+    }
+
+    .main-app {
+        position: absolute;
+        top: $topbarHeight;
+        left: 0;
+        width: 100%;
+        height: calc(100% - #{$topbarHeight});
+
+        &:focus {
+            outline: none;
+        }
+
+        &.move {
+            cursor: auto;
+        }
+
+        &.draw,
+        &.draw canvas {
+            cursor: crosshair !important;
+        }
+    }
+}
