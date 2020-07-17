@@ -1,105 +1,10 @@
-$topbarHeight: 40px;
-$sidebarWidth: 250px;
-$primaryColor: #673ab7;
+@import "styles/variables.scss";
 
 .main-container {
     position: relative;
     background-color: hsl(0, 0%, 90%);
     height: 100vh;
     width: 100%;
-
-    .toolbar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: $topbarHeight;
-        width: 100%;
-        z-index: 2;
-
-        background-color: hsl(0, 0%, 10%);
-        color: #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .controls {
-            display: flex;
-            align-items: stretch;
-
-            .control {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: calc(15px + #{$topbarHeight});
-                height: $topbarHeight;
-                cursor: pointer;
-                color: hsla(0, 0%, 100%, 0.8);
-
-                &:hover {
-                    background-color: hsl(0, 0%, 5%);
-                    color: hsla(0, 0%, 100%, 1);
-                }
-
-                &.active {
-                    background-color: $primaryColor;
-                    color: hsla(0, 0%, 100%, 1);
-                }
-            }
-
-            .icon {
-                font-size: 1.3em;
-            }
-        }
-    }
-
-    .layers {
-        position: absolute;
-        top: $topbarHeight;
-        left: 0;
-        height: calc(100% - #{$topbarHeight});
-        width: $sidebarWidth;
-        z-index: 2;
-
-        background-color: #fff;
-
-        h5 {
-            border-bottom: 1px solid hsl(0, 0%, 80%);
-            padding: 10px 15px;
-        }
-
-        .layers-list {
-            p {
-                display: flex;
-                align-items: center;
-                padding: 7px 15px;
-
-                &:hover {
-                    border: 0.5px solid transparentize($color: $primaryColor, $amount: 0.2);
-                }
-
-                .icon {
-                    font-size: 1em;
-                    margin-right: 10px;
-                }
-
-                span {
-                    font-size: 13px;
-                }
-            }
-        }
-    }
-
-    .design {
-        position: absolute;
-        top: $topbarHeight;
-        right: 0;
-        height: calc(100% - #{$topbarHeight});
-        width: $sidebarWidth;
-        z-index: 2;
-
-        background-color: #fff;
-        padding: 10px 15px;
-    }
 
     .main-app {
         position: absolute;

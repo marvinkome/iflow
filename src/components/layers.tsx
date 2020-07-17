@@ -1,6 +1,7 @@
 import React from "react"
 import { uniqBy } from "lodash"
 import { RiArtboard2Line } from "react-icons/ri"
+import "./layers.scss"
 
 type IProps = {
     layers?: any[]

@@ -3,6 +3,7 @@ import classnames from "classnames"
 import { RiArtboard2Line, RiNavigationLine } from "react-icons/ri"
 import { MdTextFields } from "react-icons/md"
 import { Mode } from "types"
+import "./topbar.scss"
 
 type IProps = {
     mode: Mode
@@ -11,7 +12,7 @@ type IProps = {
 
 export function Topbar(props: IProps) {
     return (
-        <header className="toolbar">
+        <header className="topbar">
             <div className="controls">
                 <div
                     onClick={() => props.onChangeMode(Mode.MOVE)}

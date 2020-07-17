@@ -1,0 +1,39 @@
+@import "styles/variables.scss";
+
+.layers {
+    position: absolute;
+    top: $topbarHeight;
+    left: 0;
+    height: calc(100% - #{$topbarHeight});
+    width: $sidebarWidth;
+    z-index: 2;
+
+    background-color: #fff;
+
+    h5 {
+        font-size: 11px;
+        border-bottom: 1px solid hsl(0, 0%, 90%);
+        padding: 10px 15px;
+    }
+
+    .layers-list {
+        p {
+            display: flex;
+            align-items: center;
+            padding: 7px 15px;
+
+            &:hover {
+                border: 0.5px solid transparentize($color: $primaryColor, $amount: 0.2);
+            }
+
+            .icon {
+                font-size: 1em;
+                margin-right: 10px;
+            }
+
+            span {
+                font-size: 13px;
+            }
+        }
+    }
+}

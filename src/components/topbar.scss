@@ -1,0 +1,45 @@
+@import "styles/variables.scss";
+
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $topbarHeight;
+    width: 100%;
+    z-index: 2;
+
+    background-color: hsl(0, 0%, 10%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .controls {
+        display: flex;
+        align-items: stretch;
+
+        .control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: calc(7px + #{$topbarHeight});
+            height: $topbarHeight;
+            cursor: default;
+            color: hsla(0, 0%, 100%, 0.8);
+
+            &:hover {
+                background-color: hsl(0, 0%, 5%);
+                color: hsla(0, 0%, 100%, 1);
+            }
+
+            &.active {
+                background-color: $primaryColor;
+                color: hsla(0, 0%, 100%, 1);
+            }
+        }
+
+        .icon {
+            font-size: 1.3em;
+        }
+    }
+}

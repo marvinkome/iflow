@@ -6,6 +6,7 @@ import { Mode } from "types"
 
 import { Topbar } from "components/topbar"
 import { Layers } from "components/layers"
+import { Design } from "components/design"
 
 // custom fabric objects
 import { LabeledRect } from "./fabric-utils"
@@ -19,9 +20,11 @@ import "./App.scss"
  *
  * 3: Have a button to automatically draw a rect inside the canvas
  *
- * 4: Have a button to move canvas around
+ * 4: Have a button to move frames around
  *
- * x: Have a container to list all rects inside the canvas
+ * 5: Have a container to list all rects inside the canvas
+ *
+ * 6: Have a way to design each frame
  *
  */
 
@@ -52,6 +55,15 @@ export class MainApp extends React.Component<{}, StateType> {
             selectionLineWidth: 2,
             enableRetinaScaling: true,
         })
+
+        this.canvas.add(
+            new fabric.Rect({
+                width: 900,
+                height: 70,
+                top: 0,
+                left: 0,
+            })
+        )
     }
 
     handleZoom = () => {
@@ -182,26 +194,19 @@ export class MainApp extends React.Component<{}, StateType> {
      * Render
      */
     render() {
-        const layers = this.canvas?.getObjects().map((obj: any) => ({
-            label: obj.label,
-            type: obj.type,
-        }))
-
         return (
             <div className="main-container">
                 <Topbar mode={this.state.mode} onChangeMode={this.changeMode} />
 
                 <Layers layers={this.canvas?.getObjects()} />
 
+                <Design activeObject={this.canvas?.getActiveObject()} />
+
                 <div className={classnames("main-app", this.state.mode)}>
                     <div className="drawing-canvas">
                         <canvas ref={this.canvasRef} />
                     </div>
                 </div>
-
-                <aside className="design">
-                    <p>Design</p>
-                </aside>
             </div>
         )
     }
