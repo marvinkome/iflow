@@ -12,6 +12,7 @@
 
     h5 {
         font-size: 11px;
+        font-weight: 600;
         border-bottom: 1px solid hsl(0, 0%, 90%);
         padding: 10px 15px;
     }
@@ -40,19 +41,23 @@
                 align-items: center;
                 justify-content: center;
                 grid-column-end: span 12;
-                border-radius: 5px;
-                padding: 0px 0px;
+                border-radius: 3px;
 
                 &:hover {
                     border: 1px solid hsl(0, 0%, 90%);
                 }
 
+                &:focus-within {
+                    border: 1px solid lighten($primaryColor, 25%);
+                }
+
                 span {
                     display: flex;
+                    flex: 0 0 30px;
                     align-items: center;
                     justify-content: center;
                     margin-right: 10px;
-                    font-size: 12px;
+                    font-size: 11px;
                     color: #b3b3b3;
                     width: 30px;
                     height: 30px;

@@ -10,6 +10,8 @@ import { Design } from "components/design"
 
 // custom fabric objects
 import { LabeledRect } from "./fabric-utils"
+
+import { AppContext } from "./AppContext"
 import "./App.scss"
 
 /**
@@ -26,19 +28,22 @@ import "./App.scss"
  *
  * 6: Have a way to design each frame
  *
+ * 6a: Have a way to track which frame was selected
+ *
  */
 
 type StateType = {
     mode: Mode
+    activeObject?: fabric.Object
 }
 
-export class MainApp extends React.Component<{}, StateType> {
+export class MainApp extends React.Component {
     zoom: PanZoom | null = null
     canvas: fabric.Canvas | null = null
     canvasRef = createRef<HTMLCanvasElement>()
     frameCount = 0
 
-    state = {
+    state: StateType = {
         mode: Mode.MOVE,
     }
 
@@ -56,14 +61,25 @@ export class MainApp extends React.Component<{}, StateType> {
             enableRetinaScaling: true,
         })
 
-        this.canvas.add(
-            new fabric.Rect({
-                width: 900,
-                height: 70,
-                top: 0,
-                left: 0,
+        const selectEvent = (e: fabric.IEvent) => {
+            this.setState({
+                activeObject: e.target,
             })
-        )
+        }
+
+        // add state events
+        this.canvas.on("selection:created", selectEvent)
+        this.canvas.on("selection:updated", selectEvent)
+        this.canvas.on("selection:cleared", () => this.setState({ activeObject: undefined }))
+
+        const rect = new fabric.Rect({
+            width: 950,
+            height: 70,
+            top: 0,
+            left: 5,
+        })
+        this.canvas.add(rect)
+        this.canvas.setActiveObject(rect)
     }
 
     handleZoom = () => {
@@ -195,19 +211,21 @@ export class MainApp extends React.Component<{}, StateType> {
      */
     render() {
         return (
-            <div className="main-container">
-                <Topbar mode={this.state.mode} onChangeMode={this.changeMode} />
+            <AppContext.Provider value={this.canvas}>
+                <div className="main-container">
+                    <Topbar mode={this.state.mode} onChangeMode={this.changeMode} />
 
-                <Layers layers={this.canvas?.getObjects()} />
+                    <Layers layers={this.canvas?.getObjects()} />
 
-                <Design activeObject={this.canvas?.getActiveObject()} />
+                    <Design activeObject={this.state.activeObject} />
 
-                <div className={classnames("main-app", this.state.mode)}>
-                    <div className="drawing-canvas">
-                        <canvas ref={this.canvasRef} />
+                    <div className={classnames("main-app", this.state.mode)}>
+                        <div className="drawing-canvas">
+                            <canvas ref={this.canvasRef} />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </AppContext.Provider>
         )
     }
 }

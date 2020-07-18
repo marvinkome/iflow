@@ -12,7 +12,7 @@ export class Design extends React.Component<IProps> {
             <aside className="design">
                 <h5>Design</h5>
 
-                <FrameDesign />
+                {this.props.activeObject && <FrameDesign activeObject={this.props.activeObject} />}
             </aside>
         )
     }
