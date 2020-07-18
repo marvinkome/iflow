@@ -72,12 +72,14 @@ export class MainApp extends React.Component {
         this.canvas.on("selection:updated", selectEvent)
         this.canvas.on("selection:cleared", () => this.setState({ activeObject: undefined }))
 
-        const rect = new fabric.Rect({
-            width: 950,
-            height: 70,
-            top: 0,
-            left: 5,
+        const rect = new LabeledRect({
+            width: 200,
+            height: 200,
+            top: 120,
+            left: 50,
+            label: `Frame ${this.frameCount++}`,
         })
+
         this.canvas.add(rect)
         this.canvas.setActiveObject(rect)
     }

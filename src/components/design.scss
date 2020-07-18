@@ -18,25 +18,28 @@
     }
 
     .control {
+        position: relative;
         border-bottom: 1px solid hsl(0, 0%, 90%);
-        padding: 10px 15px;
+        padding: 10px 0px;
 
         p {
             font-weight: 700;
             font-size: 11px;
+            padding-left: 15px;
             color: hsla(0, 0%, 0%, 0.7);
             cursor: default;
         }
 
         .options {
             margin-top: 10px;
+            margin-left: 5px;
 
             display: grid;
             grid-template-columns: repeat(28, 8px);
-            grid-template-rows: 32px 32px;
+            grid-template-rows: 32px;
             align-items: center;
 
-            .option {
+            .numeric-option {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -72,7 +75,7 @@
                     outline: none;
                     width: 100%;
                     color: #333;
-                    font-size: 12px;
+                    font-size: 11px;
 
                     &:focus {
                         border: none;
@@ -86,6 +89,74 @@
                     &[type="number"] {
                         -moz-appearance: textfield;
                     }
+                }
+            }
+
+            .color-option {
+                display: flex;
+                align-items: center;
+                grid-column-end: span 18;
+                border-radius: 3px;
+                cursor: default;
+
+                &:hover {
+                    border: 1px solid hsl(0, 0%, 90%);
+
+                    .alpha::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: -1px;
+                        width: 1px;
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                &:focus-within {
+                    border: 1px solid lighten($primaryColor, 25%);
+                }
+
+                .color-preview {
+                    display: flex;
+                    flex: 0 0 16px;
+                    margin: 8px;
+                    margin-left: 10px;
+                    font-size: 11px;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #000000;
+                }
+
+                span {
+                    flex: 1 0 58px;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    color: #333;
+
+                    &.alpha {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex: 0 0 48px;
+                        height: 28px;
+                    }
+                }
+            }
+
+            .color-picker {
+                position: absolute;
+                z-index: 5;
+                left: -225px;
+                top: 0px;
+
+                .cover {
+                    position: fixed;
+                    top: 0px;
+                    left: 0px;
+                    right: 0px;
+                    bottom: 0px;
                 }
             }
         }

@@ -29,6 +29,8 @@ export function NumberInput(props: IProps) {
     }, [props.defaultValue])
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.value.length) return
+
         const value = parseInt(e.target.value, 10)
 
         setValue(value)
@@ -63,7 +65,7 @@ export function NumberInput(props: IProps) {
     }
 
     return (
-        <label htmlFor={props.id} className="option">
+        <label htmlFor={props.id} className="numeric-option">
             <span>{props.label}</span>
             <input
                 id={props.id}

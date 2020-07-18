@@ -1,10 +1,4 @@
 import React, { useState, useContext, useEffect } from "react"
-import {
-    AiOutlineRadiusBottomleft,
-    AiOutlineRadiusBottomright,
-    AiOutlineRadiusUpleft,
-    AiOutlineRadiusUpright,
-} from "react-icons/ai"
 import { NumberInput } from "components/reusable/numberInput"
 import { AppContext } from "main/AppContext"
 
@@ -73,43 +67,6 @@ export function FrameDesign({ activeObject }: IProps) {
                     defaultValue={frameCoords.height}
                     onChange={(val) => saveEvent("height", val)}
                 />
-
-                {/* border-radius */}
-                <label title="top left corner radius" htmlFor="topLeftRadius" className="option">
-                    <span>
-                        <AiOutlineRadiusUpleft className="icon" />
-                    </span>
-                    <input id="x-pos" type="number" defaultValue={5} />
-                </label>
-
-                <label title="top right corner radius" htmlFor="topRightRadius" className="option">
-                    <span>
-                        <AiOutlineRadiusUpright className="icon" />
-                    </span>
-                    <input id="x-pos" type="number" defaultValue={5} />
-                </label>
-
-                <label
-                    title="bottom left corner radius"
-                    htmlFor="bottomLeftRadius"
-                    className="option"
-                >
-                    <span>
-                        <AiOutlineRadiusBottomleft className="icon" />
-                    </span>
-                    <input id="x-pos" type="number" defaultValue={5} />
-                </label>
-
-                <label
-                    title="bottom right corner radius"
-                    htmlFor="bottomRightRadius"
-                    className="option"
-                >
-                    <span>
-                        <AiOutlineRadiusBottomright className="icon" />
-                    </span>
-                    <input id="x-pos" type="number" defaultValue={5} />
-                </label>
             </div>
         </div>
     )
